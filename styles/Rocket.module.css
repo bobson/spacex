@@ -1,0 +1,74 @@
+/* :root {
+  --text-primary: #000;
+  --bgPrimary: #fff;
+  --bgSecondary: #f9f9f9;
+  --pink: #0071bd;
+  --light-blue: #e6f7ff;
+  --border: #d9d9d9;
+} */
+
+.rocketDetailContainer {
+  margin: 30px;
+}
+.rocketHeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid #d9d9d9;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  gap: 10px;
+}
+
+.rocketHeading .rocketName {
+  font-weight: 900;
+  color: #0071bd;
+}
+
+.rocketHeading p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.rocketDetailContainer {
+  margin: 30px;
+}
+
+.rocketStatsContainer {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* gap: 40px; */
+}
+
+.rocketValueStats p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.rocketStats {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  border-bottom: 1px solid #d9d9d9;
+  font-size: 1rem;
+  opacity: 0.9;
+  padding: 20px;
+}
+
+.rocketStats:hover {
+  background-color: #f9f9f9;
+}
+
+.rocketStatsName {
+  display: flex;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.stats {
+  font-weight: 800;
+}
