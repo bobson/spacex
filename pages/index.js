@@ -1,5 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
+
 import styles from "../styles/Home.module.css";
 
 import "antd/dist/antd.css";
@@ -15,6 +17,10 @@ const { Meta } = Card;
 const { Title } = Typography;
 
 export default function Home({ launches }) {
+  const [count, setCout] = useState(true);
+
+  const launchesToShow = count ? launches.slice(0, 10) : launches;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -25,13 +31,16 @@ export default function Home({ launches }) {
 
       <main>
         <Title>SpaceX Lanches</Title>
+        {count && (
+          <div className={styles.homeHeading}>
+            <Title className={styles.homeTitle}>Last 10 launches</Title>
+          </div>
+        )}
 
-        {/* <p className={styles.description}>Latest SpaceX Missions</p> */}
-        {/* <div className={styles.grid}> */}
         <Row gutter={[32, 32]}>
-          {launches.map((launch) => {
+          {launchesToShow.map((launch) => {
             const img = launch.links.flickr_images[0] || "/assets/card.jpg";
-            console.log(img);
+
             return (
               <Col
                 xs={24}
@@ -50,8 +59,8 @@ export default function Home({ launches }) {
                       }
                     >
                       <Meta
-                        title="Europe Street beat"
-                        description="www.instagram.com"
+                        title={launch.mission_name}
+                        description={launch.launch_date_local}
                       />
                     </Card>
                   </a>
@@ -59,8 +68,10 @@ export default function Home({ launches }) {
               </Col>
             );
           })}
+          <Title onClick={() => setCout(!count)} className={styles.showMore}>
+            {count ? "Show All" : "Show Last 10"}
+          </Title>
         </Row>
-        {/* </div> */}
       </main>
 
       <footer className={styles.footer}>
@@ -88,7 +99,7 @@ export async function getStaticProps() {
   const { data } = await client.query({
     query: gql`
       query GetLaunches {
-        launchesPast(limit: 10) {
+        launchesPast {
           mission_name
           launch_date_local
           links {

@@ -17,7 +17,6 @@ const Rocket = ({ rocket }) => {
     <Col className={styles.rocketDetailContainer}>
       <Col className={styles.rocketHeading}>
         <Title className={styles.rocketName}>{rocket.name}</Title>
-        <p>Rocket {rocket.name} Overwiev</p>
         <p>{rocket.description}</p>
       </Col>
 
@@ -41,9 +40,15 @@ const Rocket = ({ rocket }) => {
           </Col>
           <Text className={styles.stats}>{rocket.height.meters} m</Text>
         </Col>
+        <Col className={styles.rocketStats}>
+          <Col className={styles.rocketStatsName}>
+            <Text>Rocket mass</Text>
+          </Col>
+          <Text className={styles.stats}>{rocket.mass.kg} kg</Text>
+        </Col>
         {/* </Col> */}
       </Col>
-      <Image src={`/assets/${rocket.id}.jpg`} width="100%" height="100%" />
+      {/* <Image src={`/assets/${rocket.id}.jpg`} width="100%" height="100%" /> */}
     </Col>
   );
 };
@@ -69,6 +74,9 @@ export async function getStaticProps({ params }) {
           }
           height {
             meters
+          }
+          mass {
+            kg
           }
           wikipedia
           id
