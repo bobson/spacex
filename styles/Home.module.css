@@ -7,22 +7,25 @@
 }
 
 .title {
-  margin: 4rem;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .title h1 {
   font-size: 3rem;
   text-align: center;
+  padding-bottom: 3rem;
 }
 
 .options {
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0.5rem;
+  margin: 1rem auto;
+  margin-bottom: 4rem;
 }
 
 .options h4 {
   margin: 0;
+  text-align: center;
 }
 
 .latest {

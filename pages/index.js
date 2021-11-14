@@ -35,26 +35,25 @@ export default function Home({ launches }) {
       <div style={{ maxWidth: "1200px", margin: "auto" }}>
         <div className={styles.title}>
           <Title>Missions</Title>
-        </div>
-        <div className={styles.options}>
-          <h4>Filter by Rocket</h4>
-          <Select
-            showSearch
-            onChange={(e) => {
-              setRocket(e);
-              setCout(false);
-            }}
-            placeholder="Select a rocket"
-            value={rocket}
-            style={{ width: 200 }}
-            allowClear
-          >
-            <Option value=""></Option>
-            <Option value="falcon1">Falcon 1</Option>
-            <Option value="falcon9">Falcon 9</Option>
-            <Option value="falconheavy">Falcon Heavy</Option>
-            <Option value="starship">Starship</Option>
-          </Select>
+          <div className={styles.options}>
+            <h4>Filter by Rocket</h4>
+            <Select
+              showSearch
+              onChange={(e) => {
+                setRocket(e);
+                setCout(false);
+              }}
+              placeholder="Select a rocket"
+              value={rocket}
+              style={{ width: 200 }}
+              allowClear
+            >
+              <Option value="falcon1">Falcon 1</Option>
+              <Option value="falcon9">Falcon 9</Option>
+              <Option value="falconheavy">Falcon Heavy</Option>
+              <Option value="starship">Starship</Option>
+            </Select>
+          </div>
         </div>
 
         {launchesToShow.length ? (
