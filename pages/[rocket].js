@@ -11,7 +11,6 @@ const { Title, Text } = Typography;
 
 const Rocket = ({ rocket }) => {
   return (
-    // <Row gutter={8}>
     <Col className={styles.rocketDetailContainer}>
       <Col className={styles.rocketHeading}>
         <Title className={styles.rocketName}>{rocket.name}</Title>
@@ -53,7 +52,6 @@ const Rocket = ({ rocket }) => {
         </Col>
       </Row>
     </Col>
-    // </Row>
   );
 };
 
@@ -121,7 +119,7 @@ export async function getStaticPaths() {
 
   return {
     paths: pathsParams,
-    fallback: true,
+    fallback: false,
   };
 }
 
