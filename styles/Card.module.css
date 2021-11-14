@@ -1,0 +1,21 @@
+.launchCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: #f7fcfc;
+  width: 250px;
+}
+
+.cardImage {
+  max-height: 200px;
+  min-height: 200px;
+}
+
+@media (max-width: 600px) {
+  .launchCard * {
+    width: 100%;
+  }
+}

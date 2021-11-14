@@ -5,51 +5,55 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 import "antd/dist/antd.css";
 
-import { Card, Typography, Row, Col } from "antd";
+import { Typography, Row, Col } from "antd";
 
-const { Meta } = Card;
 const { Title, Text } = Typography;
 
 const Rocket = ({ rocket }) => {
-  // const { engines } = rocket;
-  console.log(rocket.description);
   return (
+    // <Row gutter={8}>
     <Col className={styles.rocketDetailContainer}>
       <Col className={styles.rocketHeading}>
         <Title className={styles.rocketName}>{rocket.name}</Title>
         <p>{rocket.description}</p>
       </Col>
-
-      <Col className={styles.rocketStatsContainer}>
-        {/* <Col className={styles.rocketValueStats}> */}
-        <Col className={styles.rocketStats}>
-          <Col className={styles.rocketStatsName}>
-            <Text>Engine type</Text>
-          </Col>
-          <Text className={styles.stats}>{rocket.engines.type}</Text>
+      <Row style={{ marginTop: "30px" }}>
+        <Col xs={6}>
+          <Image
+            src={`/assets/${rocket.id}.png`}
+            width="100px"
+            height="500px"
+          />
         </Col>
-        <Col className={styles.rocketStats}>
-          <Col className={styles.rocketStatsName}>
-            <Text>Engine layout</Text>
+        <Col xs={18} className={styles.rocketStatsContainer}>
+          <Col className={styles.rocketStats}>
+            <Col className={styles.rocketStatsName}>
+              <Text>Engine type</Text>
+            </Col>
+            <Text className={styles.stats}>{rocket.engines.type}</Text>
           </Col>
-          <Text className={styles.stats}>{rocket.engines.layout}</Text>
-        </Col>
-        <Col className={styles.rocketStats}>
-          <Col className={styles.rocketStatsName}>
-            <Text>Rocket height</Text>
+          <Col className={styles.rocketStats}>
+            <Col className={styles.rocketStatsName}>
+              <Text>Engine layout</Text>
+            </Col>
+            <Text className={styles.stats}>{rocket.engines.layout}</Text>
           </Col>
-          <Text className={styles.stats}>{rocket.height.meters} m</Text>
-        </Col>
-        <Col className={styles.rocketStats}>
-          <Col className={styles.rocketStatsName}>
-            <Text>Rocket mass</Text>
+          <Col className={styles.rocketStats}>
+            <Col className={styles.rocketStatsName}>
+              <Text>Rocket height</Text>
+            </Col>
+            <Text className={styles.stats}>{rocket.height.meters} m</Text>
           </Col>
-          <Text className={styles.stats}>{rocket.mass.kg} kg</Text>
+          <Col className={styles.rocketStats}>
+            <Col className={styles.rocketStatsName}>
+              <Text>Rocket mass</Text>
+            </Col>
+            <Text className={styles.stats}>{rocket.mass.kg} kg</Text>
+          </Col>
         </Col>
-        {/* </Col> */}
-      </Col>
-      {/* <Image src={`/assets/${rocket.id}.jpg`} width="100%" height="100%" /> */}
+      </Row>
     </Col>
+    // </Row>
   );
 };
 

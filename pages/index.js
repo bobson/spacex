@@ -1,92 +1,83 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useState } from "react";
-
-import styles from "../styles/Home.module.css";
-
-import "antd/dist/antd.css";
-
+import { useState, useEffect } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-import Link from "next/link";
-import { getData } from "../apollo/functions";
+import styles from "../styles/Home.module.css";
+import "antd/dist/antd.css";
+import { Typography, Row, Button, Select } from "antd";
+import UpCircleOutlined from "@ant-design/icons";
 
-import { Card, Typography, Row, Col } from "antd";
+import Card from "../components/Card";
 
-const { Meta } = Card;
 const { Title } = Typography;
+const { Option } = Select;
 
 export default function Home({ launches }) {
+  const [rocket, setRocket] = useState(undefined);
   const [count, setCout] = useState(true);
 
-  const launchesToShow = count ? launches.slice(0, 10) : launches;
+  let launchesToShow = count ? launches.slice(0, 10) : launches;
+
+  if (rocket) {
+    launchesToShow = launches.filter(
+      (launch) => launch.rocket.rocket.id === rocket
+    );
+  }
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>SpaceX Lanches</title>
-        <meta name="description" content="SpaceX Lanches Pabau" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <Title>SpaceX Lanches</Title>
-        {count && (
-          <div className={styles.homeHeading}>
-            <Title className={styles.homeTitle}>Last 10 launches</Title>
-          </div>
-        )}
-
-        <Row gutter={[32, 32]}>
-          {launchesToShow.map((launch) => {
-            const img = launch.links.flickr_images[0] || "/assets/card.jpg";
-
-            return (
-              <Col
-                xs={24}
-                sm={8}
-                lg={6}
-                key={launch.mission_name}
-                className={styles.launchCard}
-              >
-                <Link href={"/" + launch.rocket.rocket.id}>
-                  <a>
-                    <Card
-                      hoverable
-                      style={{ width: 240 }}
-                      cover={
-                        <img className={styles.cardImage} alt="" src={img} />
-                      }
-                    >
-                      <Meta
-                        title={launch.mission_name}
-                        description={launch.launch_date_local}
-                      />
-                    </Card>
-                  </a>
-                </Link>
-              </Col>
-            );
-          })}
-          <Title onClick={() => setCout(!count)} className={styles.showMore}>
-            {count ? "Show All" : "Show Last 10"}
-          </Title>
-        </Row>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <div className={styles.homeHeading}>
+        <Title className={styles.title}>SpaseX Missions</Title>
+      </div>
+      <div className={styles.options}>
+        <Title level={5}>Filter launches by Rocket</Title>
+        <Select
+          onChange={(e) => {
+            setRocket(e);
+            setCout(false);
+          }}
+          value={rocket}
+          style={{ width: 130 }}
+          allowClear
         >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+          <Option value=""></Option>
+          <Option value="falcon1">Falcon 1</Option>
+          <Option value="falcon9">Falcon 9</Option>
+          <Option value="falconheavy">Falcon Heavy</Option>
+          <Option value="starship">Starship</Option>
+        </Select>
+      </div>
+
+      {launchesToShow.length ? (
+        <>
+          {!rocket && (
+            <div className={styles.latest}>
+              <Title level={5} className={styles.latest}>
+                {count && "Last 10 missions"}
+              </Title>
+              <Button
+                type="link"
+                onClick={() => setCout(!count)}
+                className={styles.showMore}
+              >
+                {count ? "Show All" : "Show Last 10"}
+              </Button>
+            </div>
+          )}
+          <Row gutter={[32, 32]} className={styles.cardContainer}>
+            {launchesToShow.map((launch) => {
+              const img = launch.links.flickr_images[0] || "/assets/card.jpg";
+
+              return (
+                <Card key={launch.mission_name} launch={launch} img={img} />
+              );
+            })}
+            <UpCircleOutlined />
+          </Row>
+        </>
+      ) : (
+        <Title className={styles.noRecords}>No records found</Title>
+      )}
+    </>
   );
 }
 

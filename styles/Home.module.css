@@ -1,55 +1,62 @@
-.container {
-  padding: 0 2rem;
-}
-
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+.homeHeading {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 50px;
 }
 
-.homeHeading {
+.homeHeading .title {
+  font-weight: 500;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 1rem 2rem 0;
+}
+
+.options h5 {
+  font-weight: 500 !important;
+  margin-right: 1rem;
+  padding-top: 0.5rem;
+}
+
+.latest {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 40px;
+  padding-left: 0.2rem;
+  padding-bottom: 0.5rem;
 }
 
-.showMore {
-  margin-top: 0px !important;
+.latest h5 {
+  font-weight: 500 !important;
 }
 
-.app {
-  display: flex;
-  overflow: hidden;
+.content {
+  background-color: #ffff;
 }
 
-.launchCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.header {
+  background: black !important;
 }
 
-.cardImage {
-  max-height: 200px;
-  min-height: 200px;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 1000px;
+.noRecords {
+  font-weight: 400 !important;
+  text-align: center;
+  height: 50vh;
+  padding-top: 2rem;
 }
 
 @media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
+  .content {
+    padding: 0 !important;
+    padding-bottom: 50px !important;
+  }
+  .title {
+    font-size: 2rem !important;
   }
 }
