@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../styles/Rocket.module.css";
 
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
@@ -22,6 +23,7 @@ const Rocket = ({ rocket }) => {
             src={`/assets/${rocket.id}.png`}
             width="100px"
             height="500px"
+            alt="rocket"
           />
         </Col>
         <Col xs={18} className={styles.rocketStatsContainer}>
@@ -33,9 +35,9 @@ const Rocket = ({ rocket }) => {
           </Col>
           <Col className={styles.rocketStats}>
             <Col className={styles.rocketStatsName}>
-              <Text>Engine layout</Text>
+              <Text>First Flight</Text>
             </Col>
-            <Text className={styles.stats}>{rocket.engines.layout}</Text>
+            <Text className={styles.stats}>{rocket.first_flight}</Text>
           </Col>
           <Col className={styles.rocketStats}>
             <Col className={styles.rocketStatsName}>
@@ -49,6 +51,20 @@ const Rocket = ({ rocket }) => {
             </Col>
             <Text className={styles.stats}>{rocket.mass.kg} kg</Text>
           </Col>
+          <Col className={styles.rocketStats}>
+            <Col className={styles.rocketStatsName}>
+              <Text>Wikipedia</Text>
+            </Col>
+            <Text className={styles.stats}>
+              <a
+                target="_blank"
+                href={rocket.wikipedia}
+                rel="noopener noreferrer"
+              >
+                Go to Link
+              </a>
+            </Text>
+          </Col>
         </Col>
       </Row>
     </Col>
@@ -56,8 +72,6 @@ const Rocket = ({ rocket }) => {
 };
 
 export async function getStaticProps({ params }) {
-  const rocketName = params.rocket;
-
   const client = new ApolloClient({
     uri: "https://api.spacex.land/graphql/",
     cache: new InMemoryCache(),
@@ -67,28 +81,26 @@ export async function getStaticProps({ params }) {
     query: gql`
       query GetLaunches {
         rockets {
-          name
           engines {
             type
-            layout
-            version
-            number
           }
-          height {
-            meters
-          }
+          first_flight
+          name
+          id
           mass {
             kg
           }
           wikipedia
-          id
+          height {
+            meters
+          }
           description
         }
       }
     `,
   });
 
-  const launch = data.rockets.find((rocket) => rocket.id === rocketName);
+  const launch = data.rockets.find((rocket) => rocket.id === params.rocket);
 
   return {
     props: {

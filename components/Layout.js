@@ -1,4 +1,4 @@
-import { Menu, Breadcrumb, Select } from "antd";
+import { Menu } from "antd";
 import { Layout as AntLayout } from "antd";
 
 import styles from "../styles/Home.module.css";
@@ -17,13 +17,14 @@ const Layout = ({ children }) => {
             <Image src="/assets/spaceXlogo.jpg" width="300px" height="60px" />
           </a>
         </Link>
-        <Menu mode="horizontal" />
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}></Menu>
       </Header>
+
       <Content style={{ padding: "50px" }} className={styles.content}>
         <div>{children}</div>
       </Content>
       <Footer style={{ textAlign: "center" }}>
-        Ant Design ©2018 Created by Ant UED
+        Design ©{new Date().getFullYear()} Created by Slobodan
       </Footer>
     </AntLayout>
   );

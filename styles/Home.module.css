@@ -1,27 +1,28 @@
-.homeHeading {
-  display: flex;
-  justify-content: center;
+.hero {
   align-items: center;
-  margin: 50px;
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  height: 80vh;
+  margin: -20% -20% 0 -10%;
 }
 
-.homeHeading .title {
-  font-weight: 500;
+.title {
+  margin: 4rem;
+}
+
+.title h1 {
   font-size: 3rem;
   text-align: center;
 }
 
 .options {
-  display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin: 0 1rem 2rem 0;
+  margin: 0.5rem;
 }
 
-.options h5 {
-  font-weight: 500 !important;
-  margin-right: 1rem;
-  padding-top: 0.5rem;
+.options h4 {
+  margin: 0;
 }
 
 .latest {
@@ -37,7 +38,7 @@
 }
 
 .content {
-  background-color: #ffff;
+  min-height: calc(100vh - 141px);
 }
 
 .header {
@@ -47,16 +48,14 @@
 .noRecords {
   font-weight: 400 !important;
   text-align: center;
-  height: 50vh;
   padding-top: 2rem;
 }
 
 @media (max-width: 600px) {
   .content {
     padding: 0 !important;
-    padding-bottom: 50px !important;
   }
-  .title {
-    font-size: 2rem !important;
+  .hero {
+    background-position: center !important;
   }
 }
