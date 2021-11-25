@@ -1,6 +1,6 @@
 This is a [Next.js v 12](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-####The main branch is styled with [ant design](https://ant.design/) and JS.
+The main branch is styled with [ant design](https://ant.design/) and JS.
 ### Go to [https://spacex-sandy.vercel.app/](https://spacex-sandy.vercel.app/) to see the live demo for the main branch.<br/><br/><br/><br/>
 
 
