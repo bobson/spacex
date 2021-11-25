@@ -12,9 +12,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { GetStaticPaths, NextPage } from "next";
-import {  GetRockets } from "../types";
+import {  GetRockets, Rocket } from "../types";
 
-const Rocket: NextPage = ({ rocket }: any) => {
+const Rocket: NextPage<{rocket: Rocket}> = ({ rocket}) => {
   const {
     id,
     name,
