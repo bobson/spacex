@@ -1,13 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). Styled with [ant design](https://ant.design/).
+This is a [Next.js v 12](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-First, run the development server:
+The main branch is styled with [ant design](https://ant.design/) and JS.
+### Go to [https://spacex-sandy.vercel.app/](https://spacex-sandy.vercel.app/) to see the live demo for the main branch.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+The MUI-TS branch is styled wit MaterialUI and I'm using typescript and provide type definitions.
+### Go to https://spacex-mui-ts.netlify.app/](https://spacex-mui-ts.netlify.app//) to see the live demo for the MUI-TS branch.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-### Go to [https://spacex-sandy.vercel.app/](https://spacex-sandy.vercel.app/) to see the live demo.
