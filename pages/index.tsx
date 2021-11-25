@@ -1,10 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import Box from "@mui/material/Box";
+
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import Link from "next/link";
+
 
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import MissionCard from "../components/MissionCard";
