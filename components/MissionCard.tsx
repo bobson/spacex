@@ -5,9 +5,10 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 
 import Link from "next/link";
+import Image from "next/image";
 import { LaunchesPast } from "../types";
 
-export default function MissionCard({ mission }: {mission: LaunchesPast}) {
+export default function MissionCard({ mission }: { mission: LaunchesPast }) {
   const { mission_name, launch_date_local, links } = mission;
 
   const cardImage =
@@ -24,12 +25,16 @@ export default function MissionCard({ mission }: {mission: LaunchesPast}) {
         }}
       >
         <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image={cardImage}
-            alt="rocket"
+          <Image
+            src={cardImage}
+            width={300}
+            height={140}
+            alt="rocket image"
+            objectFit="cover"
+            placeholder="blur"
+            blurDataURL={cardImage}
           />
+
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
               {mission_name}

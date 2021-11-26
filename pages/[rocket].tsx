@@ -1,4 +1,3 @@
-
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Image from "next/image";
 
@@ -12,9 +11,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { GetStaticPaths, NextPage } from "next";
-import {  GetRockets, Rocket } from "../types";
+import { GetRockets, Rocket } from "../types";
 
-const Rocket: NextPage<{rocket: Rocket}> = ({ rocket}) => {
+const Rocket: NextPage<{ rocket: Rocket }> = ({ rocket }) => {
   const {
     id,
     name,
@@ -63,7 +62,14 @@ const Rocket: NextPage<{rocket: Rocket}> = ({ rocket}) => {
 
       <Grid container sx={{ alignItems: "center" }}>
         <Grid item xs={3}>
-          <Image src={`/${id}.png`} alt="rocket" width="100" height="500" />
+          <Image
+            placeholder="blur"
+            blurDataURL={`/${id}.png`}
+            src={`/${id}.png`}
+            alt="rocket"
+            width="100"
+            height="500"
+          />
         </Grid>
         <Grid item xs={9}>
           <Table>
@@ -88,13 +94,17 @@ const Rocket: NextPage<{rocket: Rocket}> = ({ rocket}) => {
 
 export default Rocket;
 
-export const getStaticProps = async ({ params }: {params: {rocket: string}}) => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { rocket: string };
+}) => {
   const client = new ApolloClient({
     uri: "https://api.spacex.land/graphql/",
     cache: new InMemoryCache(),
   });
 
-  const { data } :GetRockets = await client.query({
+  const { data }: GetRockets = await client.query({
     query: gql`
       query GetRockets {
         rockets {
@@ -130,7 +140,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     cache: new InMemoryCache(),
   });
 
-  const { data } : GetRockets = await client.query({
+  const { data }: GetRockets = await client.query({
     query: gql`
       query GetRocketsNames {
         rockets {
