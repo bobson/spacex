@@ -2,41 +2,41 @@ import { useState, MouseEvent, TouchEvent, FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { FaRocket } from "react-icons/fa";
+import { RiRocketLine } from "react-icons/ri";
+import {
+  MdKeyboardArrowDown,
+  MdMenu,
+  MdHome,
+  MdKeyboardArrowUp,
+} from "react-icons/md";
+
+import List from "@mui/material/List";
+
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import Collapse from "@mui/material/Collapse";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import HomeIcon from "@mui/icons-material/Home";
-import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const drawerWidth = 240;
 
-const ResponsiveDrawer: FC = ({children}) => {
-  
+const ResponsiveDrawer: FC = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: MouseEvent<HTMLElement> | TouchEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [openNestedLink, setopenNestedLink] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleNestedLinkClick = () => {
+    setopenNestedLink(!openNestedLink);
   };
 
   const menuItems = [
@@ -49,60 +49,58 @@ const ResponsiveDrawer: FC = ({children}) => {
   const drawer = (
     <div>
       <Toolbar sx={{ margin: "0.5rem 0 1rem 1.5rem" }}>
-        <Link href="/">
+        <Link href="/" passHref>
           <a>
             <Image src="/logo.png" width="200px" height="30px" alt="logo" />
           </a>
         </Link>
       </Toolbar>
+      <Toolbar />
 
       <List>
-        <ListItem button onClick={handleDrawerToggle}>
+        <Divider />
+        <ListItemButton selected onClick={handleDrawerToggle}>
           <ListItemIcon>
-            <HomeIcon />
+            <MdHome />
           </ListItemIcon>
           <Link href="/" passHref>
-            <ListItemText primary="Home" />
+            <ListItemText>Home</ListItemText>
           </Link>
-        </ListItem>
-        <ListItem
-          button
-          id="basic-button"
-          aria-haspopup="listbox"
-          aria-controls="lock-menu"
-          aria-label="rocket"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-        >
+        </ListItemButton>
+
+        <Divider />
+        <ListItemButton onClick={handleNestedLinkClick}>
           <ListItemIcon>
-            <AirplaneTicketIcon />
+            <FaRocket />
           </ListItemIcon>
           <ListItemText primary="Rocket" />
-          <KeyboardArrowDownIcon />
-        </ListItem>
+          {openNestedLink ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+        </ListItemButton>
+        <Collapse in={openNestedLink} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding dense>
+            {menuItems.map(({ text, link }, i) => (
+              <ListItemButton
+                onClick={() => {
+                  handleNestedLinkClick();
+                  handleDrawerToggle();
+                }}
+                key={link}
+                sx={{ px: 4 }}
+              >
+                <ListItemIcon>
+                  <RiRocketLine />
+                </ListItemIcon>
+                <Link href={link} passHref>
+                  <ListItemText primary={text} />
+                </Link>
+              </ListItemButton>
+            ))}
+          </List>
+        </Collapse>
+        <Divider />
       </List>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        onClick={handleDrawerToggle}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-          role: "listbox",
-        }}
-        sx={{ marginLeft: "4rem" }}
-      >
-        {menuItems.map(({ text, link }) => (
-          <Link key={link} href={link} passHref>
-            <MenuItem onClick={handleClose}>{text}</MenuItem>
-          </Link>
-        ))}
-      </Menu>
     </div>
   );
-
-  
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -113,6 +111,8 @@ const ResponsiveDrawer: FC = ({children}) => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
           display: { sm: "none" },
+          background:
+            "linear-gradient(90deg, rgba(0, 212, 210, 1) 38%, rgba(130, 167, 238, 1) 100%)",
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between", paddingRight: "0" }}>
@@ -130,7 +130,7 @@ const ResponsiveDrawer: FC = ({children}) => {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            <MenuIcon />
+            <MdMenu />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -155,8 +155,9 @@ const ResponsiveDrawer: FC = ({children}) => {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: "#1976D2",
-              color: "white",
+              background:
+                "linear-gradient(187deg, rgba(0, 212, 210, 1) 38%, rgba(130, 167, 238, 1) 100%)",
+              color: "black",
             },
           }}
         >
@@ -169,8 +170,10 @@ const ResponsiveDrawer: FC = ({children}) => {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: "#1976D2",
-              color: "white",
+              background:
+                "linear-gradient(187deg, rgba(0, 155, 212, 1) 38%, rgba(130, 159, 238, 1) 100%)",
+              color: "black",
+              overflow: "hidden",
             },
           }}
           open
@@ -191,6 +194,6 @@ const ResponsiveDrawer: FC = ({children}) => {
       </Box>
     </Box>
   );
-}
+};
 
 export default ResponsiveDrawer;

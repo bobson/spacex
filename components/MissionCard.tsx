@@ -12,7 +12,7 @@ export default function MissionCard({ mission }: { mission: LaunchesPast }) {
   const { mission_name, launch_date_local, links } = mission;
 
   const cardImage =
-    links.flickr_images[1] ||
+    links.flickr_images[0] ||
     "https://live.staticflickr.com/65535/50617619668_d680d7319c_o.jpg";
 
   return (
@@ -33,6 +33,7 @@ export default function MissionCard({ mission }: { mission: LaunchesPast }) {
             objectFit="cover"
             placeholder="blur"
             blurDataURL={cardImage}
+            loading="eager"
           />
 
           <CardContent>
