@@ -6,7 +6,7 @@ import { FaRocket } from "react-icons/fa";
 import { RiRocketLine } from "react-icons/ri";
 import {
   MdKeyboardArrowDown,
-  MdMenu,
+  MdOutlineMenu,
   MdHome,
   MdKeyboardArrowUp,
 } from "react-icons/md";
@@ -29,14 +29,19 @@ const drawerWidth = 240;
 
 const ResponsiveDrawer: FC = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openNestedLink, setopenNestedLink] = useState(false);
+  const [openNestedLink, setOpenNestedLink] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(4);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleNestedLinkClick = () => {
-    setopenNestedLink(!openNestedLink);
+  const handleNestedLinkToggle = () => {
+    setOpenNestedLink(!openNestedLink);
+  };
+
+  const handleListItemClick = (index: number) => {
+    setSelectedIndex(index);
   };
 
   const menuItems = [
@@ -50,7 +55,13 @@ const ResponsiveDrawer: FC = ({ children }) => {
     <div>
       <Toolbar sx={{ margin: "0.5rem 0 1rem 1.5rem" }}>
         <Link href="/" passHref>
-          <a>
+          <a
+            onClick={() => {
+              handleDrawerToggle();
+              setOpenNestedLink(false);
+              setSelectedIndex(4);
+            }}
+          >
             <Image src="/logo.png" width="200px" height="30px" alt="logo" />
           </a>
         </Link>
@@ -59,9 +70,15 @@ const ResponsiveDrawer: FC = ({ children }) => {
 
       <List>
         <Divider />
-        <ListItemButton selected onClick={handleDrawerToggle}>
+        <ListItemButton
+          onClick={() => {
+            handleDrawerToggle();
+            setOpenNestedLink(false);
+            setSelectedIndex(4);
+          }}
+        >
           <ListItemIcon>
-            <MdHome />
+            <MdHome size="1.5em" />
           </ListItemIcon>
           <Link href="/" passHref>
             <ListItemText>Home</ListItemText>
@@ -69,22 +86,27 @@ const ResponsiveDrawer: FC = ({ children }) => {
         </ListItemButton>
 
         <Divider />
-        <ListItemButton onClick={handleNestedLinkClick}>
+        <ListItemButton onClick={handleNestedLinkToggle}>
           <ListItemIcon>
-            <FaRocket />
+            <FaRocket size="1.2em" />
           </ListItemIcon>
           <ListItemText primary="Rocket" />
-          {openNestedLink ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+          {openNestedLink ? (
+            <MdKeyboardArrowUp size="1.5em" />
+          ) : (
+            <MdKeyboardArrowDown size="1.5em" />
+          )}
         </ListItemButton>
         <Collapse in={openNestedLink} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding dense>
+          <List component="div" disablePadding>
             {menuItems.map(({ text, link }, i) => (
               <ListItemButton
-                onClick={() => {
-                  handleNestedLinkClick();
+                selected={selectedIndex === i}
+                onClick={(e) => {
                   handleDrawerToggle();
+                  handleListItemClick(i);
                 }}
-                key={link}
+                key={i}
                 sx={{ px: 4 }}
               >
                 <ListItemIcon>
@@ -130,7 +152,7 @@ const ResponsiveDrawer: FC = ({ children }) => {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            <MdMenu />
+            <MdOutlineMenu style={{ color: "black" }} size="1.5em" />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -171,7 +193,7 @@ const ResponsiveDrawer: FC = ({ children }) => {
               boxSizing: "border-box",
               width: drawerWidth,
               background:
-                "linear-gradient(187deg, rgba(0, 155, 212, 1) 38%, rgba(130, 159, 238, 1) 100%)",
+                "linear-gradient(187deg, rgba(0, 212, 210, 1) 38%, rgba(130, 167, 238, 1) 100%)",
               color: "black",
               overflow: "hidden",
             },
