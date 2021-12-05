@@ -2,7 +2,7 @@ import { useState, MouseEvent, TouchEvent, FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { FaRocket } from "react-icons/fa";
+import { FaRocket, FaTwitter, FaGithub, FaFacebook } from "react-icons/fa";
 import { RiRocketLine } from "react-icons/ri";
 import {
   MdKeyboardArrowDown,
@@ -107,7 +107,13 @@ const ResponsiveDrawer: FC = ({ children }) => {
                   handleListItemClick(i);
                 }}
                 key={i}
-                sx={{ px: 4 }}
+                sx={{
+                  px: 4,
+                  "&.Mui-selected": {
+                    background:
+                      "linear-gradient(90deg, rgba(255, 169, 0, 1) 0%, rgba(161, 255, 0, 1) 100%)",
+                  },
+                }}
               >
                 <ListItemIcon>
                   <RiRocketLine />
@@ -121,6 +127,25 @@ const ResponsiveDrawer: FC = ({ children }) => {
         </Collapse>
         <Divider />
       </List>
+
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 10,
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          width: "100%",
+          "& *": {
+            color: "#005E5D",
+            cursor: "pointer",
+          },
+        }}
+      >
+        <FaFacebook size="2rem" />
+        <FaGithub size="2rem" />
+        <FaTwitter size="2rem" />
+      </Box>
     </div>
   );
 
@@ -140,7 +165,12 @@ const ResponsiveDrawer: FC = ({ children }) => {
         <Toolbar sx={{ justifyContent: "space-between", paddingRight: "0" }}>
           <Box component="div">
             <Link href="/">
-              <a>
+              <a
+                onClick={() => {
+                  setSelectedIndex(4);
+                  setOpenNestedLink(false);
+                }}
+              >
                 <Image src="/logo.png" width="200px" height="30px" alt="logo" />
               </a>
             </Link>

@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Image from "next/image";
+import Head from "next/head";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -41,54 +42,59 @@ const Rocket: NextPage<{ rocket: Rocket }> = ({ rocket }) => {
   ];
 
   return (
-    <Box sx={{ padding: "2rem", maxWidth: "1000px", margin: "auto" }}>
-      <Typography
-        variant="h2"
-        component="div"
-        gutterBottom
-        sx={{ color: "#1976D2", textAlign: "center" }}
-      >
-        {name}
-      </Typography>
-      <Typography
-        variant="subtitle1"
-        component="div"
-        gutterBottom
-        sx={{ textAlign: "center" }}
-        mb={6}
-      >
-        <i>{description}</i>
-      </Typography>
+    <>
+      <Head>
+        <title>{name}</title>
+      </Head>
+      <Box sx={{ padding: "2rem", maxWidth: "1000px", margin: "auto" }}>
+        <Typography
+          variant="h2"
+          component="div"
+          gutterBottom
+          sx={{ textAlign: "center" }}
+        >
+          {name}
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          component="div"
+          gutterBottom
+          sx={{ textAlign: "center" }}
+          mb={6}
+        >
+          <i>{description}</i>
+        </Typography>
 
-      <Grid container sx={{ alignItems: "center" }}>
-        <Grid item xs={3}>
-          <Image
-            placeholder="blur"
-            blurDataURL={`/${id}.png`}
-            src={`/${id}.png`}
-            alt="rocket"
-            width="100"
-            height="500"
-          />
+        <Grid container sx={{ alignItems: "center" }}>
+          <Grid item xs={3}>
+            <Image
+              placeholder="blur"
+              blurDataURL={`/${id}.png`}
+              src={`/${id}.png`}
+              alt="rocket"
+              width="100"
+              height="500"
+            />
+          </Grid>
+          <Grid item xs={9}>
+            <Table sx={{ m: 2 }}>
+              <TableBody>
+                {rows.map(({ label, value }, i) => (
+                  <TableRow key={i} hover>
+                    <TableCell component="th" scope="row">
+                      {label}
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: "900" }} align="right">
+                      {value}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Grid>
         </Grid>
-        <Grid item xs={9}>
-          <Table>
-            <TableBody>
-              {rows.map(({ label, value }, i) => (
-                <TableRow key={i} hover>
-                  <TableCell component="th" scope="row">
-                    {label}
-                  </TableCell>
-                  <TableCell sx={{ fontWeight: "900" }} align="right">
-                    {value}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </>
   );
 };
 
