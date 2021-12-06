@@ -38,10 +38,10 @@ const Home: NextPage<{ missions: DataMissions["launchesPast"] }> = ({
 
   return (
     <Container maxWidth="xl">
-      <Typography m={6} textAlign="center" variant="h2" component="div">
+      <Typography mb={4} mt={6} textAlign="center" variant="h2" component="div">
         Missions
       </Typography>
-      <Box sx={{ minWidth: 120, width: 180, m: "auto", mb: 6 }}>
+      <Box sx={{ minWidth: 120, width: 180, m: "auto", mb: 5 }}>
         <FormControl fullWidth>
           <InputLabel sx={{ top: "-18%" }} id="filter by rocket">
             Filter By Rocket
