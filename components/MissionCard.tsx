@@ -33,7 +33,6 @@ export default function MissionCard({ mission }: { mission: LaunchesPast }) {
             objectFit="cover"
             placeholder="blur"
             blurDataURL={cardImage}
-            loading="eager"
           />
 
           <CardContent>

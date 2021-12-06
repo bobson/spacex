@@ -68,12 +68,13 @@ const Rocket: NextPage<{ rocket: Rocket }> = ({ rocket }) => {
         <Grid container sx={{ alignItems: "center" }}>
           <Grid item xs={3}>
             <Image
-              placeholder="blur"
-              blurDataURL={`/${id}.png`}
+              // placeholder="blur"
+              // blurDataURL={`/${id}.png`}
               src={`/${id}.png`}
               alt="rocket"
               width="100"
               height="500"
+              loading="eager"
             />
           </Grid>
           <Grid item xs={9}>

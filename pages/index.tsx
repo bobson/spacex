@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Head from "next/head";
+
 import Link from "next/link";
 
 import Grid from "@mui/material/Grid";
@@ -43,13 +43,16 @@ const Home: NextPage<{ missions: DataMissions["launchesPast"] }> = ({
       </Typography>
       <Box sx={{ minWidth: 120, width: 180, m: "auto", mb: 6 }}>
         <FormControl fullWidth>
-          <InputLabel id="filter by rocket">Filter By Rocket</InputLabel>
+          <InputLabel sx={{ top: "-18%" }} id="filter by rocket">
+            Filter By Rocket
+          </InputLabel>
           <Select
             labelId="filter by rocket"
             id="filter by rocket"
             value={rocket}
             label="Filter By Rocket"
             onChange={handleChange}
+            sx={{ height: 40 }}
           >
             <MenuItem value="">All</MenuItem>
             <MenuItem value="falcon1">Falcon 1</MenuItem>
