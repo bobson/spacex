@@ -1,4 +1,4 @@
-import { useState, MouseEvent, TouchEvent, FC } from "react";
+import { useState, FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -33,11 +33,11 @@ const ResponsiveDrawer: FC = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(4);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setMobileOpen((prevMobOpen) => !prevMobOpen);
   };
 
   const handleNestedLinkToggle = () => {
-    setOpenNestedLink(!openNestedLink);
+    setOpenNestedLink((prevOpenLink) => !prevOpenLink);
   };
 
   const handleListItemClick = (index: number) => {

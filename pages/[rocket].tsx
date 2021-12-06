@@ -46,7 +46,7 @@ const Rocket: NextPage<{ rocket: Rocket }> = ({ rocket }) => {
       <Head>
         <title>{name}</title>
       </Head>
-      <Box sx={{ padding: "1rem", maxWidth: "1000px", margin: "auto" }}>
+      <Box sx={{ padding: "1rem", maxWidth: "1000px", margin: "20px auto" }}>
         <Typography
           variant="h2"
           component="div"
